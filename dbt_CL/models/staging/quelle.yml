@@ -1,0 +1,17 @@
+sources:
+  - name: erp
+    database: CRITICAL_LOOT
+    schema: RAW_ERP
+    tables:
+      - name: orders
+      - name: order_items
+      - name: products
+      - name: invoices
+      - name: invoice_items
+      - name: payments
+
+  - name: crm
+    database: CRITICAL_LOOT
+    schema: RAW_CRM
+    tables:
+      - name: customers

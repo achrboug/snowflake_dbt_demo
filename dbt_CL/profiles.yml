@@ -1,0 +1,10 @@
+dbt_CL:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      role: SYSADMIN
+      warehouse: CRITICAL_LOOT_WH
+      database: CRITICAL_LOOT
+      schema: DBT
+      threads: 8
