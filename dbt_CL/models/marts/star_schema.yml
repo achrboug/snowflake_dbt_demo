@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  # Kundendimension
+  - name: dim_customer
+    columns:
+      - name: CUSTOMER_KEY
+        data_tests:
+          - unique       # Jeder Kunde nur einmal
+          - not_null     # Schlüssel darf nicht leer sein
+
+  # Produktdimension
+  - name: dim_products
+    columns:
+      - name: PRODUCT_KEY
+        data_tests:
+          - unique       # Jedes Produkt nur einmal
+          - not_null     # Schlüssel darf nicht leer sein
+
+  # Faktentabelle
+  - name: fct_order_items
+    columns:
+      - name: ORDER_ITEM_ID
+        data_tests:
+          - unique       # Jede Bestellposition nur einmal
+          - not_null     # ID darf nicht leer sein
+
+      - name: CUSTOMER_KEY
+        data_tests:
+          - not_null     # Kundenschlüssel darf nicht leer sein
+          - relationships:
+              to: ref('dim_customer')
+              field: CUSTOMER_KEY  # Kunde muss existieren
+
+      - name: PRODUCT_KEY
+        data_tests:
+          - not_null     # Produktschlüssel darf nicht leer sein
+          - relationships:
+              to: ref('dim_products')
+              field: PRODUCT_KEY   # Produkt muss existieren

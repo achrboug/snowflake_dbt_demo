@@ -1,17 +1,19 @@
 sources:
-  - name: erp  # ERP-Daten
-    database: CRITICAL_LOOT  # Datenbank
-    schema: RAW_ERP  # Rohdaten aus ERP
+  - name: erp # ERP-Daten
+    database: CRITICAL_LOOT # Datenbank
+    schema: RAW_ERP # ERP-Rohdaten
     tables:
-      - name: orders  # Bestellungen
-      - name: order_items  # Bestellpositionen
-      - name: products  # Produkte
-      - name: invoices  # Rechnungen
-      - name: invoice_items  # Rechnungspositionen
-      - name: payments  # Zahlungen
-
-  - name: crm  # Kundendaten
-    database: CRITICAL_LOOT  # Datenbank
-    schema: RAW_CRM  # Rohdaten aus CRM
+      - name: orders # Bestellungen
+      - name: order_items # Bestellpositionen
+      - name: products # Produkte
+      - name: invoices # Rechnungen
+      - name: invoice_items # Rechnungspositionen
+      - name: payments # Zahlungen
+      - name: franchises # Franchises (danach geschrieben)
+      - name: product_categories # Produktkategorien (danach)
+      - name: platforms # Plattformen (neu)
+  - name: crm # Kundendaten
+    database: CRITICAL_LOOT # Datenbank
+    schema: RAW_CRM # CRM-Rohdaten
     tables:
-      - name: customers  # Kunden
+      - name: customers # Kunden
