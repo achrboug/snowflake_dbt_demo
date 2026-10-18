@@ -1,5 +1,6 @@
+
 -- Neues Schema CORE erstellen
-CREATE SCHEMA CORE;
+CREATE SCHEMA IF NOT EXISTS CRITICAL_LOOT.CORE;
 
 -- Alle Daten aus der Tabelle anzeigen
 SELECT * FROM stg_orders__cast;
@@ -36,11 +37,11 @@ FROM CRITICAL_LOOT.DBT.FCT_ORDER_ITEMS;
 
 -- Zeilenanzahl der drei ERP-Tabellen vergleichen
 SELECT
-    'INVOICES' AS tabelle, -- Tabellenname
-    COUNT(*) AS anzahl -- Anzahl der Zeilen
+    'INVOICES' AS tabelle,
+    COUNT(*) AS anzahl
 FROM CRITICAL_LOOT.RAW_ERP.INVOICES
 
-UNION ALL -- Ergebnisse untereinander anzeigen
+UNION ALL
 
 SELECT
     'INVOICE_ITEMS',
@@ -54,30 +55,15 @@ SELECT
     COUNT(*)
 FROM CRITICAL_LOOT.RAW_ERP.PAYMENTS;
 
-
--- Anzahl der Datensätze prüfen
-SELECT 'INVOICES' AS Tabelle, COUNT(*) AS Anzahl
-FROM CRITICAL_LOOT.RAW_ERP.INVOICES
-
-UNION ALL
-
-SELECT 'INVOICE_ITEMS', COUNT(*)
-FROM CRITICAL_LOOT.RAW_ERP.INVOICE_ITEMS
-
-UNION ALL
-
-SELECT 'PAYMENTS', COUNT(*)
-FROM CRITICAL_LOOT.RAW_ERP.PAYMENTS;
-
-
+-- Bestellpositionen mit Kunden- und Produktschlüsseln anzeigen
 SELECT
-    ORDER_ITEM_ID,  -- Bestellposition
-    CUSTOMER_KEY,   -- Kundenschlüssel
-    PRODUCT_KEY     -- Produktschlüssel
+    ORDER_ITEM_ID,
+    CUSTOMER_KEY,
+    PRODUCT_KEY
 FROM CRITICAL_LOOT.DBT.FCT_ORDER_ITEMS
 LIMIT 10;
 
-
+-- Prüfen, ob Kunden und Produkte zugeordnet sind
 SELECT
     COUNT(*) AS ANZAHL_POSITIONEN,
     COUNT(c.CUSTOMER_KEY) AS KUNDEN_GEFUNDEN,
@@ -90,19 +76,17 @@ LEFT JOIN CRITICAL_LOOT.DBT.DIM_CUSTOMER c
 LEFT JOIN CRITICAL_LOOT.DBT.DIM_PRODUCTS p
     ON f.PRODUCT_KEY = p.PRODUCT_KEY;
 
-
-    SELECT
+-- Anzahl der zugeordneten Produkte prüfen
+SELECT
     COUNT(*) AS PRODUKTE_GEFUNDEN
 FROM CRITICAL_LOOT.DBT.FCT_ORDER_ITEMS f
 JOIN CRITICAL_LOOT.DBT.DIM_PRODUCTS p
     ON f.PRODUCT_KEY = p.PRODUCT_KEY;
 
-
-
-
-
-    SELECT COUNT(*) AS ANZAHL_PRODUKTE
+-- Anzahl der Produkte in der Dimension
+SELECT COUNT(*) AS ANZAHL_PRODUKTE
 FROM CRITICAL_LOOT.DBT.DIM_PRODUCTS;
 
+-- Anzahl der Bestellpositionen in der Faktentabelle
 SELECT COUNT(*) AS ANZAHL_POSITIONEN
 FROM CRITICAL_LOOT.DBT.FCT_ORDER_ITEMS;
