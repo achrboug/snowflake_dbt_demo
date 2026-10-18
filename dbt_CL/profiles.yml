@@ -1,10 +1,10 @@
-dbt_CL:
-  target: dev
+dbt_CL: # Name des dbt-Projekts
+  target: dev # Entwicklungsumgebung
   outputs:
     dev:
-      type: snowflake
-      role: SYSADMIN
-      warehouse: CRITICAL_LOOT_WH
-      database: CRITICAL_LOOT
-      schema: DBT
-      threads: 8
+      type: snowflake # Datenbank-System
+      role: SYSADMIN # Snowflake-Rolle
+      warehouse: CRITICAL_LOOT_WH # Warehouse
+      database: CRITICAL_LOOT # Datenbank
+      schema: DBT # Schema für dbt-Modelle
+      threads: 8 # 8 parallele Ausführungen

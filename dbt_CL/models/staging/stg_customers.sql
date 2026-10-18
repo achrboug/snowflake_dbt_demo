@@ -1,7 +1,6 @@
-
 SELECT
-    CUSTOMER_ID,
-    SEGMENT_ID,
-    FIRST_NAME,
-    LAST_NAME
-FROM {{ source('crm', 'customers') }}
+    CUSTOMER_ID, -- Kundennummer
+    SEGMENT_ID,  -- Kundensegment
+    FIRST_NAME,  -- Vorname
+    LAST_NAME    -- Nachname
+FROM {{ source('crm', 'customers') }} -- Kundendaten aus Raw

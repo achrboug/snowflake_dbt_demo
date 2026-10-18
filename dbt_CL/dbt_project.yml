@@ -1,30 +1,30 @@
-name: dbt_CL
-version: 1.0.0
-config-version: 2
+name: dbt_CL # Projektname
+version: 1.0.0 # Projektversion
+config-version: 2 # dbt-Konfigurationsversion
 
-profile: dbt_CL
+profile: dbt_CL # Verbindung aus profiles.yml
 
 model-paths:
-  - models
+  - models # SQL-Modelle
 
 analysis-paths:
-  - analyses
+  - analyses # SQL-Analysen
 
 test-paths:
-  - tests
+  - tests # Tests
 
 seed-paths:
-  - seeds
+  - seeds # CSV-Dateien
 
 macro-paths:
-  - macros
+  - macros # Wiederverwendbare Funktionen
 
 snapshot-paths:
-  - snapshots
+  - snapshots # Historische Daten
 
 models:
   dbt_CL:
-    +materialized: view
+    +materialized: view # Modelle standardmäßig als Views
 
     marts:
-      +materialized: table
+      +materialized: table # Mart-Modelle als Tabellen
